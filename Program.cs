@@ -1,4 +1,6 @@
+using AutoMapper;
 using EaseDeskMaster_API.Container;
+using EaseDeskMaster_API.Helper;
 using EaseDeskMaster_API.Repos;
 using EaseDeskMaster_API.Service;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +16,10 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<IEmployeeService, EmployeeService>();
 builder.Services.AddDbContext<DevMasterDataContext>(o =>
 o.UseSqlServer(builder.Configuration.GetConnectionString("DefaultSqlConnection")));
+
+var autoMapper = new MapperConfiguration(item => item.AddProfile(new AutoMapperHandler()));
+IMapper mapper = autoMapper.CreateMapper();
+builder.Services.AddSingleton(mapper);
 
 var app = builder.Build();
 
