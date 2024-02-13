@@ -4,6 +4,7 @@ using EaseDeskMaster_API.Helper;
 using EaseDeskMaster_API.Repos;
 using EaseDeskMaster_API.Service;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +21,15 @@ o.UseSqlServer(builder.Configuration.GetConnectionString("DefaultSqlConnection")
 var autoMapper = new MapperConfiguration(item => item.AddProfile(new AutoMapperHandler()));
 IMapper mapper = autoMapper.CreateMapper();
 builder.Services.AddSingleton(mapper);
+
+string LogPath = builder.Configuration.GetSection("Logging:LogPath").Value;
+var _logger = new LoggerConfiguration()
+	.MinimumLevel.Debug()
+	.MinimumLevel.Override("microsoft", Serilog.Events.LogEventLevel.Warning)
+	.Enrich.FromLogContext()
+	.WriteTo.File(LogPath)
+	.CreateLogger();
+builder.Logging.AddSerilog(_logger);
 
 var app = builder.Build();
 
