@@ -59,7 +59,6 @@ namespace EaseDeskMaster_API.Container
 			var _data = await this._context.TblEmployees.FindAsync(code);
 			if (_data != null)
 			{
-
 				_response = this._mapper.Map<TblEmployee, EmployeeModel>(_data);
 			}
 			return _response;

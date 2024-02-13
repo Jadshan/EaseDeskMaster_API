@@ -11,12 +11,12 @@ namespace EaseDeskMaster_API.Controllers
 		private readonly IEmployeeService _employeeService;
 		public EmployeeController(IEmployeeService employeeService)
 		{
-			this._employeeService = employeeService;
+			_employeeService = employeeService;
 		}
 		[HttpGet]
 		public async Task<IActionResult> GetAll()
 		{
-			var data = await this._employeeService.GetAll();
+			var data = await _employeeService.GetAll();
 			if (data == null)
 			{
 				return NotFound();
@@ -27,8 +27,8 @@ namespace EaseDeskMaster_API.Controllers
 		[HttpGet("GetByCode")]
 		public async Task<IActionResult> GetByCode(string code)
 		{
-			var data = await this._employeeService.GetByCode(code);
-			if (data == null)
+			var data = await _employeeService.GetByCode(code);
+			if (data.Code == null)
 			{
 				return NotFound();
 			}
@@ -38,7 +38,7 @@ namespace EaseDeskMaster_API.Controllers
 		[HttpPost("Create")]
 		public async Task<IActionResult> Create(EmployeeModel _employee)
 		{
-			var data = await this._employeeService.Create(_employee);
+			var data = await _employeeService.Create(_employee);
 
 			return Ok(data);
 		}
@@ -46,7 +46,7 @@ namespace EaseDeskMaster_API.Controllers
 		[HttpPut("Update")]
 		public async Task<IActionResult> Update(EmployeeModel _employee, string code)
 		{
-			var data = await this._employeeService.Update(_employee, code);
+			var data = await _employeeService.Update(_employee, code);
 
 			return Ok(data);
 		}
@@ -54,7 +54,7 @@ namespace EaseDeskMaster_API.Controllers
 		[HttpDelete("Delete")]
 		public async Task<IActionResult> Delete(string code)
 		{
-			var data = await this._employeeService.Remove(code);
+			var data = await _employeeService.Remove(code);
 
 			return Ok(data);
 		}
