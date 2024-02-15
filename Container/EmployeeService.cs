@@ -14,8 +14,8 @@ namespace EaseDeskMaster_API.Container
 		private readonly IMapper _mapper;
 		public EmployeeService(DevMasterDataContext context, IMapper mapper)
 		{
-			this._context = context;
-			this._mapper = mapper;
+			_context = context;
+			_mapper = mapper;
 		}
 
 		public async Task<APIResponse> Create(EmployeeModel data)
@@ -46,7 +46,7 @@ namespace EaseDeskMaster_API.Container
 			if (_data != null)
 			{
 
-				_response = this._mapper.Map<List<TblEmployee>, List<EmployeeModel>>(_data);
+				_response = _mapper.Map<List<TblEmployee>, List<EmployeeModel>>(_data);
 			}
 			return _response;
 		}
@@ -56,10 +56,10 @@ namespace EaseDeskMaster_API.Container
 		public async Task<EmployeeModel> GetByCode(string code)
 		{
 			EmployeeModel _response = new();
-			var _data = await this._context.TblEmployees.FindAsync(code);
+			var _data = await _context.TblEmployees.FindAsync(code);
 			if (_data != null)
 			{
-				_response = this._mapper.Map<TblEmployee, EmployeeModel>(_data);
+				_response = _mapper.Map<TblEmployee, EmployeeModel>(_data);
 			}
 			return _response;
 		}
