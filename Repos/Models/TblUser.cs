@@ -6,37 +6,45 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EaseDeskMaster_API.Repos.Models;
 
-[Table("tbl_employee")]
-public partial class TblEmployee
+[Table("tbl_user")]
+public partial class TblUser
 {
     [Key]
+    [Column("code")]
     [StringLength(50)]
     [Unicode(false)]
     public string Code { get; set; } = null!;
 
-    [StringLength(50)]
+    [Column("name")]
+    [StringLength(250)]
     [Unicode(false)]
-    public string Name { get; set; } = null!;
+    public string? Name { get; set; }
 
-    [StringLength(50)]
+    [Column("userName")]
+    [StringLength(150)]
+    [Unicode(false)]
+    public string UserName { get; set; } = null!;
+
+    [Column("email")]
+    [StringLength(100)]
     [Unicode(false)]
     public string? Email { get; set; }
 
-    [StringLength(50)]
+    [Column("phone")]
+    [StringLength(20)]
     [Unicode(false)]
     public string? Phone { get; set; }
 
+    [Column("password")]
     [StringLength(50)]
     [Unicode(false)]
-    public string? Type { get; set; }
+    public string? Password { get; set; }
 
-    [StringLength(250)]
-    [Unicode(false)]
-    public string? Adress { get; set; }
-
-    [StringLength(50)]
-    [Unicode(false)]
-    public string? EmployeeGroup { get; set; }
-
+    [Column("isActive")]
     public bool? IsActive { get; set; }
+
+    [Column("role")]
+    [StringLength(50)]
+    [Unicode(false)]
+    public string? Role { get; set; }
 }

@@ -1,9 +1,11 @@
 ﻿using EaseDeskMaster_API.Model;
 using EaseDeskMaster_API.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EaseDeskMaster_API.Controllers
 {
+	[Authorize]
 	[Route("api/[controller]")]
 	[ApiController]
 	public class EmployeeController : ControllerBase
@@ -13,6 +15,8 @@ namespace EaseDeskMaster_API.Controllers
 		{
 			_employeeService = employeeService;
 		}
+
+		[AllowAnonymous]
 		[HttpGet]
 		public async Task<IActionResult> GetAll()
 		{
