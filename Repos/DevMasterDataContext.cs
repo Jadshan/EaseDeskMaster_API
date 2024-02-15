@@ -16,6 +16,10 @@ public partial class DevMasterDataContext : DbContext
 
 	public virtual DbSet<TblEmployee> TblEmployees { get; set; }
 
+	public virtual DbSet<TblRefreshtoken> TblRefreshtokens { get; set; }
+
+	public virtual DbSet<TblUser> TblUsers { get; set; }
+
 
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
 	{
